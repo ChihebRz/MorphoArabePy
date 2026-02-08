@@ -1,5 +1,11 @@
 # Utilitaires : Chargement fichiers (énoncé p.2)
+import arabic_reshaper
+from bidi.algorithm import get_display
 
+def display_arabic(text):
+    """Reformate le texte arabe pour affichage RTL correct dans terminal."""
+    reshaped = arabic_reshaper.reshape(text)
+    return get_display(reshaped)
 def load_roots_from_file(tree, filename):
     with open(filename, 'r', encoding='utf-8') as f:
         for line in f:

@@ -3,7 +3,7 @@
 from avl_tree import AVLTree
 from hash_table import HashTable
 from morpho_engine import generate_word, validate_word
-from utils import load_roots_from_file, load_schemes_from_file
+from utils import load_roots_from_file, load_schemes_from_file, display_arabic
 
 def main():
     tree = AVLTree()
@@ -44,7 +44,7 @@ def main():
             scheme = hash_table.find(name)
             if scheme:
                 word = generate_word(root, scheme)
-                print(f"Mot généré: {word}")
+                print(f"Mot généré: {display_arabic(word)}")
             else:
                 print("Schème non trouvé.")
         elif choice == '4':
@@ -60,7 +60,7 @@ def main():
             valid = validate_word(word, root, tree, hash_table, set_matched)
             
             if valid:
-                print(f"OUI (Schème: {matched[0]})")
+                print(f"OUI (Schème: {display_arabic(matched)})")
                 # Optionnel : afficher directement les dérivés mis à jour
                 node = tree.search(root)
                 if node and matched[0] in node.derivatives:
@@ -73,7 +73,7 @@ def main():
             if node:
                 print("Dérivés:")
                 for w, freq in node.derivatives.items():
-                    print(f"{w} (fréq: {freq})")
+                    print(f"{display_arabic(w)} (fréq: {freq})")
             else:
                 print("Racine non trouvée.")
 
